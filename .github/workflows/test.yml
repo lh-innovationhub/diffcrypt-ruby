@@ -26,6 +26,8 @@ jobs:
         exclude:
             - ruby: "3.3"
               rails: "6.1"
+            - ruby: "head"
+              rails: "6.1"
     steps:
     - uses: actions/checkout@v3
     - name: Set up Ruby
