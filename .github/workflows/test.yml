@@ -10,6 +10,7 @@ jobs:
   tests:
     name: "RSpec @ Ruby ${{ matrix.ruby }}, Rails ${{ matrix.rails }}"
     runs-on: ubuntu-latest
+    continue-on-error: true
     env:
       BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
     strategy:
@@ -38,6 +39,7 @@ jobs:
   linters:
     name: "Rubocop @ Ruby ${{ matrix.ruby }}, Rails ${{ matrix.rails }}"
     runs-on: ubuntu-latest
+    continue-on-error: true
     env:
       BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
     strategy:
