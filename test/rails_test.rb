@@ -48,9 +48,6 @@ class RailsTest < Minitest::Test
 
   RAILS_VERSIONS.each do |rails_version|
     define_method "test_that_rails_#{rails_version.gsub('.', '_')}_works" do
-      # Install Zeitwerk before 2.7, because 2.7 requires Ruby 3.2+
-      run_command('gem', 'install', 'zeitwerk', '-v', '2.6.11')
-
       Bundler.with_unbundled_env do
         Dir.chdir(TMP_RAILS_ROOT) do
           tmp_version_root = "rails_#{rails_version.gsub('.', '_')}"
@@ -61,6 +58,7 @@ class RailsTest < Minitest::Test
 
           Dir.chdir(tmp_version_root) do
             File.write('Gemfile', "gem 'diffcrypt', path: '../../..'", mode: 'a')
+            File.write('Gemfile', "gem 'zeitwerk', '2.6.11'", mode: 'a')
             run_command('bundle', 'install')
             stdout, _stderr, _status = run_command('bundle', 'exec', 'rails', 'r', 'puts Rails.version')
             assert_equal rails_version, stdout.strip
