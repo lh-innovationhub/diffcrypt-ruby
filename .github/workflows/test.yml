@@ -50,7 +50,7 @@ jobs:
     strategy:
       matrix:
         ruby:
-          - "head"
+          - "3.4"
         rails:
           - "7.2"
     steps:
